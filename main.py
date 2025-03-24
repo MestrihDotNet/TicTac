@@ -1,12 +1,15 @@
+# declaring the 2d matrix
+ttt = [[" "," "," "],[" "," "," "],[" "," "," "]]
+
 winner = False
 
-def showGame():
+def showgame():
     for row in ttt:
         print(" | ".join(row))
         print("-" * 9)
 
 
-def checkWinner():
+def checkwinner():
     # Check rows
     for row in ttt:
         if row[0] == row[1] == row[2] and row[0] != " ":
@@ -29,41 +32,61 @@ def checkWinner():
 
     return False  # Return False if no winner found
 
+def checkdraw():
+    for row in ttt:
+        if " " in row:
+            return False
+    print("it's a draw")
+    return True
 
-ttt = [[" "," "," "],
-             [" "," "," "],
-             [" "," "," "]
-             ]
 
 print("welcome to tic-tac-toe!")
-player1Row = int(input("you are player one you will be the 'X', please choose which row do you want to start with? \n 1__|__|__ \n 2__|__|__ \n 3__|__|__ \n Row: "))
+player1Row = int(input("you are player one you will have the 'X', please choose which row do you want to start with? \n (1) __|__|__ \n (2) __|__|__ \n (3) __|__|__ \n Row: "))
 player1Column = int(input("now choose which Column you wanna change (1)|(2)|(3): "))
 ttt[player1Row-1][player1Column-1] = 'X'
-showGame()
+showgame()
 
 player2Row = int(input("player 2 choose a row: "))
 player2Column = int(input("player 2 choose a column: "))
 ttt[player2Row-1][player2Column-1]= "O"
-showGame()
+showgame()
 
 
 while winner == False:
-    if checkWinner() == True:
+    if checkdraw():
         break
     else:
-        player1Row = int(input("Player 1 Row: "))
-        player1Column = int(input("Player 1 Column: "))
-        if ttt[player1Row - 1][player1Column - 1] == " ":
-            ttt[player1Row - 1][player1Column - 1] = 'X'
-        showGame()
-    if checkWinner() == True:
+        if checkwinner():
+            break
+        else:
+            player1Row = int(input("Player 1 Row: "))
+            player1Column = int(input("Player 1 Column: "))
+            if ttt[player1Row - 1][player1Column - 1] == " ":
+                ttt[player1Row - 1][player1Column - 1] = 'X'
+            else:
+                print("Invalid, try again!!")
+                player1Row = int(input("Player 1 Row: "))
+                player1Column = int(input("Player 1 Column: "))
+                if ttt[player1Row - 1][player1Column - 1] == " ":
+                    ttt[player1Row - 1][player1Column - 1] = 'X'
+            showgame()
+    if checkdraw():
         break
     else:
-        player2Row = int(input("Player 2 Row: "))
-        player2Column = int(input("Player 2 Column: "))
-        if ttt[player2Row - 1][player2Column - 1] == " ":
-            ttt[player2Row - 1][player2Column - 1] = 'O'
-        showGame()
+        if checkwinner():
+            break
+        else:
+            player2Row = int(input("Player 2 Row: "))
+            player2Column = int(input("Player 2 Column: "))
+            if ttt[player2Row - 1][player2Column - 1] == " ":
+                ttt[player2Row - 1][player2Column - 1] = 'O'
+            else:
+                print("Invalid, try again!!")
+                player2Row = int(input("Player 2 Row: "))
+                player2Column = int(input("Player 2 Column: "))
+                if ttt[player2Row - 1][player2Column - 1] == " ":
+                    ttt[player2Row - 1][player2Column - 1] = 'O'
+            showgame()
 
 
 
